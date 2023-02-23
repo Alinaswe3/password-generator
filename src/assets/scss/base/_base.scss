@@ -11,5 +11,11 @@ html {
 }
 
 body {
-  box-sizing: border-box;
+  min-height: 100vh;
+}
+
+#root {
+  height: 100vh;
+  background-color: $very-dark-grey;
+  margin: auto;
 }
