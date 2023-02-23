@@ -1,7 +1,7 @@
-import "./assets/scss/main.scss";
+import './assets/scss/main.scss'
 
 const App = () => {
-  return <div className="main"></div>;
-};
+    return <h1>Hello World</h1>
+}
 
 export default App;
