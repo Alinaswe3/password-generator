@@ -17,4 +17,7 @@ body {
 #root {
   height: 100vh;
   background-color: $very-dark-grey;
+  display: grid;
+  align-content: center;
+  justify-items: center;
 }

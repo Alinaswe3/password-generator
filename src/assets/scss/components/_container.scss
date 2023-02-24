@@ -1,6 +1,8 @@
 .container {
-  background-color: $dark-grey;
-  margin: auto;
-  padding: 2.4rem 3.2rem 3.2rem 3.2rem;
+  margin: 3.2rem;
   max-width: fit-content;
+  background-color: red;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  row-gap: 2.4rem;
 }

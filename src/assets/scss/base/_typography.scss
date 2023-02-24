@@ -8,15 +8,23 @@ body {
 
 .heading {
 
-  &--high {
-    font-size: 2.4rem;
+  &__high {
+    font-size: $font-large;
+
+    &-grey {
+      color: $color-grey;
+    }
   }
 
-  &--low {
-    font-size: 3.2rem;
+  &__low {
+    font-size: $font-medium;
+
+    &-grey {
+      color: $color-grey;
+    }
   }
 }
 
 .body {
-  font-size: 1.8rem;
+  font-size: $font-small;
 }
