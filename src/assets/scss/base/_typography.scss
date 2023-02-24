@@ -1,6 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700&display=swap');
 
 body {
- font-family: 'JetBrains Mono', monospace;
- font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  color: $color-white;
+}
+
+.heading {
+
+  &--high {
+    font-size: 2.4rem;
+  }
+
+  &--low {
+    font-size: 3.2rem;
+  }
+}
+
+.body {
+  font-size: 1.8rem;
 }

@@ -1,7 +1,16 @@
 import "./assets/scss/main.scss";
+import Heading from "./components/Heading";
+import Container from "./components/Container";
 
 const App = () => {
-  return <></>;
+  return (
+    <>
+      <Heading text="Password Generator" />
+      <Container>
+        <p> This is the container</p>
+      </Container>
+    </>
+  );
 };
 
 export default App;
