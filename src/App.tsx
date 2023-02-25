@@ -3,6 +3,7 @@ import Heading from "./components/Heading";
 import Container from "./components/Container";
 import Card from "./components/Card";
 import GeneratedPassword from "./components/GeneratedPassword";
+import ConfigurePassword from "./components/ConfigurePassword";
 
 const App = () => {
   return (
@@ -12,7 +13,7 @@ const App = () => {
           <GeneratedPassword />
         </Card>
         <Card>
-          <p>This is for configuration purposes</p>
+          <ConfigurePassword />
         </Card>
       </Container>
     </>
