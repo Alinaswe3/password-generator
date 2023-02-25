@@ -7,8 +7,7 @@ body {
 }
 
 .heading {
-
-  &__high {
+  &__large {
     font-size: $font-large;
 
     &-grey {
@@ -16,7 +15,7 @@ body {
     }
   }
 
-  &__low {
+  &__small {
     font-size: $font-medium;
 
     &-grey {
@@ -28,3 +27,4 @@ body {
 .body {
   font-size: $font-small;
 }
+

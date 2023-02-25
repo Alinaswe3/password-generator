@@ -1,8 +1,7 @@
 .container {
-  margin: 3.2rem;
-  max-width: fit-content;
-  background-color: red;
+  max-width: 100%;
+  grid-column: 2/3;
   display: grid;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows:min-content 1fr 1fr;
   row-gap: 2.4rem;
 }
