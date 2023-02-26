@@ -7,4 +7,24 @@
     margin: 0;
     padding: 0;
   }
+
+  &__generate {
+    padding: 1.8rem 0;
+    background-color: $neon-green;
+    font-size: $font-small;
+    font-weight: 700;
+    letter-spacing: 0.05rem;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.8rem;
+    border: 0.2rem solid $neon-green;
+    transition: all 0.3s;
+
+    &:hover {
+      background-color: $very-dark-grey;
+      color: $neon-green;
+    }
+  }
 }

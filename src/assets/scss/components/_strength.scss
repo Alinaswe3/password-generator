@@ -1,0 +1,31 @@
+.strength {
+
+  &__container {
+    padding: 2.4rem;
+    background-color: $very-dark-grey;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__text {
+    text-transform: uppercase;
+
+    &-title {
+      margin-right: 0.8rem;
+    }
+  }
+
+  &__level {
+    display: block;
+    height: 2.6rem;
+    width: 0.8rem;
+    border: 0.2rem solid $color-white;
+  }
+
+  &__levels {
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+  }
+}

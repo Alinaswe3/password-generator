@@ -1,0 +1,44 @@
+.checkbox {
+  &__container {
+    display: flex;
+    align-items: center;
+    gap: 2.4rem;
+
+    & label {
+      cursor: pointer;
+      display: flex;
+
+      &:hover::before, {
+        border: 0.3rem solid $neon-green;
+      }
+
+      &::before {
+        content: "";
+        width: 1em;
+        height: 1em;
+        margin: 0 2.4rem 2rem 0;
+        border: 0.3rem solid $color-white;
+      }
+    }
+
+    & input[type="checkbox"] {
+      cursor: pointer;
+      opacity: 0;
+      position: absolute;
+
+      &:hover + label::before {
+        border: 0.3rem solid $neon-green;
+      }
+
+      &:checked + label::before {
+        content: "\002714";
+        background-color: $neon-green;
+        border: 0.3rem solid $neon-green;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: $very-dark-grey;
+      }
+    }
+  }
+}

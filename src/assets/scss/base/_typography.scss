@@ -25,6 +25,13 @@ body {
 }
 
 .body {
-  font-size: $font-small;
+  &__text {
+    font-size: $font-small;
+
+    &-grey {
+      font-size: $font-small;
+      color: $color-grey;
+    }
+  }
 }
 

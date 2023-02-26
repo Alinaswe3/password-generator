@@ -2,6 +2,21 @@
   max-width: 100%;
   grid-column: 2/3;
   display: grid;
-  grid-template-rows:min-content 1fr 1fr;
+  grid-template-rows:repeat(3, min-content);
   row-gap: 2.4rem;
+}
+
+.configure-password {
+  display: grid;
+  row-gap: 3.2rem;
+}
+
+.password__length {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.password__options {
+  margin-top: 1.6rem;
 }
