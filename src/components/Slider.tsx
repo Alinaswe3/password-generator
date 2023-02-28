@@ -4,8 +4,10 @@ const Slider: React.FC<{
   min: string;
   max: string;
   classes: string;
-}> = ({ min, max, classes }) => {
+  updateVal: any;
+}> = ({ min, max, classes, updateVal }) => {
   const [slideValue, setSlideValue] = useState(8);
+
   const moveSlide = (event: any) => {
     const target = event.target;
 
@@ -17,6 +19,8 @@ const Slider: React.FC<{
 
     target.style.backgroundSize =
       ((value - min) * 100) / (max - min) + "% 100%";
+
+    updateVal(event);
   };
   return (
     <input

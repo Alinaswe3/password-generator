@@ -1,4 +1,3 @@
-import Heading from "./Heading";
 import React, { useEffect, useState } from "react";
 
 const StrengthBar: React.FC<{
@@ -14,7 +13,6 @@ const StrengthBar: React.FC<{
   const veryDark = "#18171f";
 
   const lightBars = (value: number) => {
-    console.log("I ran");
     let strengthColor = colorRed;
 
     if (value > 4 || value < 1) return;
@@ -29,7 +27,7 @@ const StrengthBar: React.FC<{
       strengthColor = colorRed;
       setName("too weak!");
     } else if (value === 2) {
-      strengthColor = colorYellow;
+      strengthColor = colorOrange;
       setName("weak");
     } else if (value === 3) {
       strengthColor = colorYellow;
