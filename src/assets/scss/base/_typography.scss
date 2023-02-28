@@ -35,3 +35,18 @@ body {
   }
 }
 
+.text {
+  &__password {
+    max-width: 33rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  &__copied {
+    text-transform: uppercase;
+    color: $neon-green;
+    font-weight: 700;
+    font-size: $font-small;
+  }
+}

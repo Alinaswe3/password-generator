@@ -1,40 +1,45 @@
 import React, { useEffect, useState } from "react";
+import {
+  COLOR_GREEN,
+  COLOR_ORANGE,
+  COLOR_RED,
+  COLOR_VERY_DARK_GREY,
+  COLOR_WHITE,
+  COLOR_YELLOW,
+  LEVEL_1,
+  LEVEL_2,
+  LEVEL_3,
+  LEVEL_4,
+} from "../utils/constants";
 
 const StrengthBar: React.FC<{
   strengthValue: number;
 }> = ({ strengthValue }) => {
   const [name, setName] = useState("too weak!");
 
-  const colorRed = "#f64a4a";
-  const colorOrange = "#fb7c58";
-  const colorGreen = "#a4ffaf";
-  const colorYellow = "#f8c065";
-  const colorWhite = "#e6e5ea";
-  const veryDark = "#18171f";
-
   const lightBars = (value: number) => {
-    let strengthColor = colorRed;
+    let strengthColor = COLOR_RED;
 
     if (value > 4 || value < 1) return;
 
     for (let x = 1; x <= 4; x++) {
       const element: any = document.querySelector(`.strength__level-${x}`);
-      element.style.backgroundColor = veryDark;
-      element.style.border = `0.2rem solid ${colorWhite}`;
+      element.style.backgroundColor = COLOR_VERY_DARK_GREY;
+      element.style.border = `0.2rem solid ${COLOR_WHITE}`;
     }
 
     if (value === 1) {
-      strengthColor = colorRed;
-      setName("too weak!");
+      strengthColor = COLOR_RED;
+      setName(LEVEL_1);
     } else if (value === 2) {
-      strengthColor = colorOrange;
-      setName("weak");
+      strengthColor = COLOR_ORANGE;
+      setName(LEVEL_2);
     } else if (value === 3) {
-      strengthColor = colorYellow;
-      setName("medium");
+      strengthColor = COLOR_YELLOW;
+      setName(LEVEL_3);
     } else if (value === 4) {
-      strengthColor = colorGreen;
-      setName("strong");
+      strengthColor = COLOR_GREEN;
+      setName(LEVEL_4);
     }
 
     for (let x = 1; x <= value; x++) {

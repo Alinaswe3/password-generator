@@ -1,12 +1,13 @@
 import React, { useState } from "react";
+import { MIN_PASSWORD_LENGTH } from "../utils/constants";
 
 const Slider: React.FC<{
-  min: string;
-  max: string;
+  min: number;
+  max: number;
   classes: string;
   updateVal: any;
 }> = ({ min, max, classes, updateVal }) => {
-  const [slideValue, setSlideValue] = useState(8);
+  const [slideValue, setSlideValue] = useState(MIN_PASSWORD_LENGTH);
 
   const moveSlide = (event: any) => {
     const target = event.target;

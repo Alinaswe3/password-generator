@@ -1,17 +1,24 @@
 import React, { useContext, useState } from "react";
 import { HiArrowRight } from "react-icons/hi2";
+import { passwordStrength } from "check-password-strength";
 import Slider from "./Slider";
 import PasswordLength from "./PasswordLength";
 import PasswordOptions from "./PasswordOptions";
 import StrengthBar from "./StrengthBar";
 import Button from "./Button";
 import { PasswordContext } from "../App";
+import {
+  DEFAULT_STRENGTH_VALUE,
+  MAX_PASSWORD_LENGTH,
+  MIN_PASSWORD_LENGTH,
+} from "../utils/constants";
 
 const ConfigurePassword = () => {
   const context = useContext(PasswordContext);
 
   const [isLoading, setIsLoading] = useState(false);
-  const [charLength, setCharLength] = useState(8);
+  const [charLength, setCharLength] = useState(MIN_PASSWORD_LENGTH);
+  const [strengthVal, setStrengthVal] = useState(DEFAULT_STRENGTH_VALUE);
 
   const generatePassword = async () => {
     const { includeUpper, includeLower, includeNumber, includeSymbol } =
@@ -37,11 +44,13 @@ const ConfigurePassword = () => {
       password: generatedPassword,
     });
 
+    setStrengthVal(passwordStrength(generatedPassword).id + 1);
+
     setIsLoading(false);
   };
 
   const requestPassword = async (
-    passwordLength: number = 8,
+    passwordLength: number = MIN_PASSWORD_LENGTH,
     includeNumbers: boolean = false,
     includeSymbols: boolean = false
   ) => {
@@ -72,9 +81,14 @@ const ConfigurePassword = () => {
   return (
     <div className="configure-password">
       <PasswordLength value={charLength + ""} />
-      <Slider min="8" max="32" classes="slider" updateVal={getSlideVal} />
+      <Slider
+        min={MIN_PASSWORD_LENGTH}
+        max={MAX_PASSWORD_LENGTH}
+        classes="slider"
+        updateVal={getSlideVal}
+      />
       <PasswordOptions />
-      <StrengthBar strengthValue={4} />
+      <StrengthBar strengthValue={strengthVal} />
       <Button classes="button__generate" clickFunc={generatePassword}>
         {isLoading ? (
           "generating..."

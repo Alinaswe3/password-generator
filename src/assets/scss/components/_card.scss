@@ -4,7 +4,9 @@
   max-width: 100%;
 
   &__generate-password {
+    max-width: 100%;
     display: flex;
     justify-content: space-between;
+    gap: 2.4rem;
   }
 }

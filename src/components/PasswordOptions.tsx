@@ -11,13 +11,14 @@ const PasswordOptions = () => {
   const [includeSymbols, setIncludeSymbols] = useState(false);
 
   useEffect(() => {
-    setState({
-      ...state,
-      includeNumber: includeNumbers,
-      includeLower: isLowercase,
-      includeUpper: isUppercase,
-      includeSymbol: includeSymbols,
-    });
+    if (setState)
+      setState({
+        ...state,
+        includeNumber: includeNumbers,
+        includeLower: isLowercase,
+        includeUpper: isUppercase,
+        includeSymbol: includeSymbols,
+      });
   }, [isLowercase, isUppercase, includeSymbols, includeNumbers]);
 
   return (

@@ -4,9 +4,10 @@ import Card from "./components/Card";
 import GeneratedPassword from "./components/GeneratedPassword";
 import ConfigurePassword from "./components/ConfigurePassword";
 import { createContext, useState } from "react";
+import { DEFAULT_PASSWORD } from "./utils/constants";
 
 const defaultStateVal: any = {
-  password: "P4$5W0rD!",
+  password: DEFAULT_PASSWORD,
   includeLower: false,
   includeNumber: false,
   includeSymbol: false,
