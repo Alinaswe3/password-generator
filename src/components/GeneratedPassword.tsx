@@ -1,7 +1,7 @@
-import {HiOutlineDocumentDuplicate} from "react-icons/hi2";
-import React, {useContext, useEffect, useState} from "react";
-import {PasswordContext} from "../App";
-import {DEFAULT_PASSWORD} from "../utils/constants";
+import { HiOutlineDocumentDuplicate } from "react-icons/hi2";
+import React, { useContext, useEffect, useState } from "react";
+import { PasswordContext } from "../App";
+import { DEFAULT_PASSWORD } from "../utils/constants";
 
 const GeneratedPassword = () => {
   const context = useContext(PasswordContext);
@@ -34,7 +34,7 @@ const GeneratedPassword = () => {
 
   const copyText = async () => {
     if (password === DEFAULT_PASSWORD)
-      return;
+      alert("No password generated! Please generate a password");
     else {
       await navigator.clipboard.writeText(password);
       toggleCopied();
@@ -42,36 +42,36 @@ const GeneratedPassword = () => {
   };
 
   return (
-      <div
-          className="card__generate-password"
-          onMouseEnter={toggleWhiteBtn}
-          onMouseLeave={closeEffects}
+    <div
+      className="card__generate-password"
+      onMouseEnter={toggleWhiteBtn}
+      onMouseLeave={closeEffects}
+    >
+      <p
+        className={`heading__large text__password ${
+          hasGenerated ? "" : "make-grey"
+        }`}
       >
-        <p
-            className={`heading__large text__password ${
-                hasGenerated ? "" : "make-grey"
-            }`}
-        >
-          {password}
-        </p>
-        <button
-            className="button__clear"
-            onMouseDown={toggleWhiteBtn}
-            onMouseUp={toggleWhiteBtn}
-            onClick={copyText}
-        >
+        {password}
+      </p>
+      <button
+        className="button__clear"
+        onMouseDown={toggleWhiteBtn}
+        onMouseUp={toggleWhiteBtn}
+        onClick={copyText}
+      >
         <span className="copy__container">
           {isPasswordCopied ? (
-              <>
-                <p className="text__copied">copied</p>
-                <HiOutlineDocumentDuplicate size="2.4rem" color={btnColor}/>{" "}
-              </>
+            <>
+              <p className="text__copied">copied</p>
+              <HiOutlineDocumentDuplicate size="2.4rem" color={btnColor} />{" "}
+            </>
           ) : (
-              <HiOutlineDocumentDuplicate size="2.4rem" color={btnColor}/>
+            <HiOutlineDocumentDuplicate size="2.4rem" color={btnColor} />
           )}
         </span>
-        </button>
-      </div>
+      </button>
+    </div>
   );
 };
 

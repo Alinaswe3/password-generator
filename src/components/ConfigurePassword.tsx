@@ -23,15 +23,17 @@ const ConfigurePassword = () => {
   );
 
   const generatePassword = async () => {
-    if (!navigator.onLine) return;
+    if (!navigator.onLine) {
+      alert("No internet connection! Please connect to the internet");
+      return;
+    }
 
     const { includeUpper, includeLower, includeNumber, includeSymbol } =
       context?.state;
     const setState = context.setState;
 
-    setIsLoading(true);
-
     try {
+      setIsLoading(true);
       let generatedPassword = await requestPassword(
         charLength,
         includeNumber,
@@ -52,10 +54,10 @@ const ConfigurePassword = () => {
 
       setStrengthVal(passwordStrength(generatedPassword).id + 1);
     } catch (e) {
-      return;
+      alert("Something went wrong! Please try again.");
+    } finally {
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
   };
 
   const requestPassword = async (
