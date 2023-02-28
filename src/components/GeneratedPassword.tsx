@@ -1,16 +1,16 @@
-import { HiOutlineDocumentDuplicate } from "react-icons/hi2";
-import { useContext, useEffect, useState } from "react";
-import { PasswordContext } from "../App";
-import { DEFAULT_PASSWORD } from "../utils/constants";
+import {HiOutlineDocumentDuplicate} from "react-icons/hi2";
+import React, {useContext, useEffect, useState} from "react";
+import {PasswordContext} from "../App";
+import {DEFAULT_PASSWORD} from "../utils/constants";
 
 const GeneratedPassword = () => {
   const context = useContext(PasswordContext);
 
-  const [btnColor, setBtnColor] = useState("#a4ffaf");
-  const [hasGenerated, setHasGenerated] = useState(false);
-  const [isPasswordCopied, setIsPasswordCopied] = useState(false);
+  const [btnColor, setBtnColor] = useState<string>("#a4ffaf");
+  const [hasGenerated, setHasGenerated] = useState<boolean>(false);
+  const [isPasswordCopied, setIsPasswordCopied] = useState<boolean>(false);
 
-  const { password } = context.state;
+  let password = context.state?.password;
 
   useEffect(() => {
     if (password === DEFAULT_PASSWORD) setHasGenerated(false);
@@ -33,41 +33,45 @@ const GeneratedPassword = () => {
   };
 
   const copyText = async () => {
-    await navigator.clipboard.writeText(password);
-    toggleCopied();
+    if (password === DEFAULT_PASSWORD)
+      return;
+    else {
+      await navigator.clipboard.writeText(password);
+      toggleCopied();
+    }
   };
 
   return (
-    <div
-      className="card__generate-password"
-      onMouseEnter={toggleWhiteBtn}
-      onMouseLeave={closeEffects}
-    >
-      <p
-        className={`heading__large text__password ${
-          hasGenerated ? "" : "make-grey"
-        }`}
+      <div
+          className="card__generate-password"
+          onMouseEnter={toggleWhiteBtn}
+          onMouseLeave={closeEffects}
       >
-        {password}
-      </p>
-      <button
-        className="button__clear"
-        onMouseDown={toggleWhiteBtn}
-        onMouseUp={toggleWhiteBtn}
-        onClick={copyText}
-      >
+        <p
+            className={`heading__large text__password ${
+                hasGenerated ? "" : "make-grey"
+            }`}
+        >
+          {password}
+        </p>
+        <button
+            className="button__clear"
+            onMouseDown={toggleWhiteBtn}
+            onMouseUp={toggleWhiteBtn}
+            onClick={copyText}
+        >
         <span className="copy__container">
           {isPasswordCopied ? (
-            <>
-              <p className="text__copied">copied</p>
-              <HiOutlineDocumentDuplicate size="2.4rem" color={btnColor} />{" "}
-            </>
+              <>
+                <p className="text__copied">copied</p>
+                <HiOutlineDocumentDuplicate size="2.4rem" color={btnColor}/>{" "}
+              </>
           ) : (
-            <HiOutlineDocumentDuplicate size="2.4rem" color={btnColor} />
+              <HiOutlineDocumentDuplicate size="2.4rem" color={btnColor}/>
           )}
         </span>
-      </button>
-    </div>
+        </button>
+      </div>
   );
 };
 

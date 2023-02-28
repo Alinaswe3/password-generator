@@ -16,35 +16,44 @@ import {
 const ConfigurePassword = () => {
   const context = useContext(PasswordContext);
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [charLength, setCharLength] = useState(MIN_PASSWORD_LENGTH);
-  const [strengthVal, setStrengthVal] = useState(DEFAULT_STRENGTH_VALUE);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [charLength, setCharLength] = useState<number>(MIN_PASSWORD_LENGTH);
+  const [strengthVal, setStrengthVal] = useState<number>(
+    DEFAULT_STRENGTH_VALUE
+  );
 
   const generatePassword = async () => {
+    if (!navigator.onLine) return;
+
     const { includeUpper, includeLower, includeNumber, includeSymbol } =
-      context.state;
+      context?.state;
     const setState = context.setState;
 
     setIsLoading(true);
-    let generatedPassword = await requestPassword(
-      charLength,
-      includeNumber,
-      includeSymbol
-    );
 
-    if (includeUpper && !includeLower) {
-      generatedPassword = generatedPassword.toUpperCase();
+    try {
+      let generatedPassword = await requestPassword(
+        charLength,
+        includeNumber,
+        includeSymbol
+      );
+
+      if (includeUpper && !includeLower) {
+        generatedPassword = generatedPassword.toUpperCase();
+      }
+      if (includeLower && !includeUpper) {
+        generatedPassword = generatedPassword.toLowerCase();
+      }
+
+      setState({
+        ...context.state,
+        password: generatedPassword,
+      });
+
+      setStrengthVal(passwordStrength(generatedPassword).id + 1);
+    } catch (e) {
+      return;
     }
-    if (includeLower && !includeUpper) {
-      generatedPassword = generatedPassword.toLowerCase();
-    }
-
-    setState({
-      ...context.state,
-      password: generatedPassword,
-    });
-
-    setStrengthVal(passwordStrength(generatedPassword).id + 1);
 
     setIsLoading(false);
   };
