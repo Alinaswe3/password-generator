@@ -6,11 +6,6 @@ export const requestPassword = async (
   includeNumbers: boolean = false,
   includeSymbols: boolean = false
 ) => {
-  const test = `${
-    // @ts-ignore
-    import.meta.env.VITE_API_URL
-  }?length=${passwordLength}&exclude_numbers=${!includeNumbers}&exclude_special_chars=${!includeSymbols}`;
-  console.log(test);
   const response = await fetch(
     `${
       // @ts-ignore
