@@ -45,9 +45,8 @@ const GeneratedPassword = () => {
         animationIn: ["animate__animated", "animate__fadeIn"],
         animationOut: ["animate__animated", "animate__fadeOut"],
         dismiss: {
-          duration: 0,
-          click: true,
-          showIcon: true,
+          duration: 7500,
+          onScreen: true,
         },
       });
     } else {
