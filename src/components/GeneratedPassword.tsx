@@ -1,5 +1,6 @@
 import { HiOutlineDocumentDuplicate } from "react-icons/hi2";
 import React, { useContext, useEffect, useState } from "react";
+import { Store } from "react-notifications-component";
 import { PasswordContext } from "../App";
 import { DEFAULT_PASSWORD } from "../utils/constants";
 
@@ -33,9 +34,23 @@ const GeneratedPassword = () => {
   };
 
   const copyText = async () => {
-    if (password === DEFAULT_PASSWORD)
-      alert("No password generated! Please generate a password");
-    else {
+    if (password === DEFAULT_PASSWORD) {
+      Store.addNotification({
+        id: "warn",
+        title: "No password generated!",
+        message: "Please generate a password in order to copy to clipboard.",
+        type: "warning",
+        insert: "top",
+        container: "top-full",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 0,
+          click: true,
+          showIcon: true,
+        },
+      });
+    } else {
       await navigator.clipboard.writeText(password);
       toggleCopied();
     }
@@ -52,7 +67,7 @@ const GeneratedPassword = () => {
           hasGenerated ? "" : "make-grey"
         }`}
       >
-        {password}
+        {password === "" || !password ? DEFAULT_PASSWORD : password}
       </p>
       <button
         className="button__clear"

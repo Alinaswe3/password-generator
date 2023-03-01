@@ -1,4 +1,6 @@
 import "./assets/scss/main.scss";
+import { ReactNotifications } from "react-notifications-component";
+import "react-notifications-component/dist/theme.css";
 import Container from "./components/Container";
 import Card from "./components/Card";
 import GeneratedPassword from "./components/GeneratedPassword";
@@ -22,7 +24,6 @@ const App = () => {
   const updateState = (newState: {}) => {
     setState(newState);
   };
-
   const stateVal = {
     state: state,
     setState: updateState,
@@ -31,6 +32,7 @@ const App = () => {
   return (
     <>
       <PasswordContext.Provider value={stateVal}>
+        <ReactNotifications />
         <Container>
           <Card>
             <GeneratedPassword />

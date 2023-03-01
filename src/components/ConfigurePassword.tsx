@@ -12,6 +12,7 @@ import {
   MAX_PASSWORD_LENGTH,
   MIN_PASSWORD_LENGTH,
 } from "../utils/constants";
+import { Store } from "react-notifications-component";
 
 const ConfigurePassword = () => {
   const context = useContext(PasswordContext);
@@ -24,7 +25,21 @@ const ConfigurePassword = () => {
 
   const generatePassword = async () => {
     if (!navigator.onLine) {
-      alert("No internet connection! Please connect to the internet");
+      Store.addNotification({
+        id: "no-internet",
+        title: "No internet connection!",
+        message: "Please connect to the internet and try again.",
+        type: "danger",
+        insert: "top",
+        container: "top-full",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 0,
+          click: true,
+          showIcon: true,
+        },
+      });
       return;
     }
 
@@ -54,7 +69,22 @@ const ConfigurePassword = () => {
 
       setStrengthVal(passwordStrength(generatedPassword).id + 1);
     } catch (e) {
-      alert("Something went wrong! Please try again.");
+      Store.addNotification({
+        id: "error",
+        title: "Something went wrong!",
+        message:
+          "An error occurred while generating password. Please try again.",
+        type: "danger",
+        insert: "top",
+        container: "top-full",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 0,
+          click: true,
+          showIcon: true,
+        },
+      });
     } finally {
       setIsLoading(false);
     }
