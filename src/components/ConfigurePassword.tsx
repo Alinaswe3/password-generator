@@ -9,10 +9,15 @@ import Button from "./Button";
 import { PasswordContext } from "../App";
 import {
   DEFAULT_STRENGTH_VALUE,
+  ERROR_MESSAGE,
+  ERROR_TITLE,
   MAX_PASSWORD_LENGTH,
   MIN_PASSWORD_LENGTH,
+  NO_INTERNET_MESSAGE,
+  NO_INTERNET_TITLE,
+  TYPE_DANGER,
 } from "../utils/constants";
-import { Store } from "react-notifications-component";
+import { popupNotification, requestPassword } from "../utils/helpers";
 
 const ConfigurePassword = () => {
   const context = useContext(PasswordContext);
@@ -25,20 +30,12 @@ const ConfigurePassword = () => {
 
   const generatePassword = async () => {
     if (!navigator.onLine) {
-      Store.addNotification({
-        id: "no-internet",
-        title: "No internet connection!",
-        message: "Please connect to the internet and try again.",
-        type: "danger",
-        insert: "top",
-        container: "top-full",
-        animationIn: ["animate__animated", "animate__fadeIn"],
-        animationOut: ["animate__animated", "animate__fadeOut"],
-        dismiss: {
-          duration: 7500,
-          onScreen: true,
-        },
-      });
+      popupNotification(
+        "no-internet",
+        NO_INTERNET_TITLE,
+        NO_INTERNET_MESSAGE,
+        TYPE_DANGER
+      );
       return;
     }
 
@@ -48,6 +45,7 @@ const ConfigurePassword = () => {
 
     try {
       setIsLoading(true);
+
       let generatedPassword = await requestPassword(
         charLength,
         includeNumber,
@@ -68,49 +66,10 @@ const ConfigurePassword = () => {
 
       setStrengthVal(passwordStrength(generatedPassword).id + 1);
     } catch (e) {
-      Store.addNotification({
-        id: "error",
-        title: "Something went wrong!",
-        message:
-          "An error occurred while generating password. Please try again.",
-        type: "danger",
-        insert: "top",
-        container: "top-full",
-        animationIn: ["animate__animated", "animate__fadeIn"],
-        animationOut: ["animate__animated", "animate__fadeOut"],
-        dismiss: {
-          duration: 7500,
-          onScreen: true,
-        },
-      });
+      popupNotification("error", ERROR_TITLE, ERROR_MESSAGE, TYPE_DANGER);
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const requestPassword = async (
-    passwordLength: number = MIN_PASSWORD_LENGTH,
-    includeNumbers: boolean = false,
-    includeSymbols: boolean = false
-  ) => {
-    const response = await fetch(
-      `${
-        // @ts-ignore
-        import.meta.env.VITE_API_URL
-      }?length=${passwordLength}&exclude_numbers=${!includeNumbers}&exclude_special_chars=${!includeSymbols}`,
-      {
-        method: "GET",
-        // @ts-ignore
-        headers: {
-          // @ts-ignore
-          "Content-Type": "application/json",
-          // @ts-ignore
-          "X-Api-Key": import.meta.env.VITE_API_KEY,
-        },
-      }
-    );
-    const { random_password: password } = await response.json();
-    return password;
   };
 
   const getSlideVal = (event: any) => {

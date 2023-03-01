@@ -1,8 +1,13 @@
 import { HiOutlineDocumentDuplicate } from "react-icons/hi2";
 import React, { useContext, useEffect, useState } from "react";
-import { Store } from "react-notifications-component";
 import { PasswordContext } from "../App";
-import { DEFAULT_PASSWORD } from "../utils/constants";
+import {
+  DEFAULT_PASSWORD,
+  NO_PASSWORD_MESSAGE,
+  NO_PASSWORD_TITLE,
+  TYPE_WARN,
+} from "../utils/constants";
+import { popupNotification } from "../utils/helpers";
 
 const GeneratedPassword = () => {
   const context = useContext(PasswordContext);
@@ -14,7 +19,7 @@ const GeneratedPassword = () => {
   let password = context.state?.password;
 
   useEffect(() => {
-    if (password === DEFAULT_PASSWORD) setHasGenerated(false);
+    if (password === DEFAULT_PASSWORD || !password) setHasGenerated(false);
     else setHasGenerated(true);
   }, [password]);
 
@@ -35,20 +40,12 @@ const GeneratedPassword = () => {
 
   const copyText = async () => {
     if (password === DEFAULT_PASSWORD) {
-      Store.addNotification({
-        id: "warn",
-        title: "No password generated!",
-        message: "Please generate a password in order to copy to clipboard.",
-        type: "warning",
-        insert: "top",
-        container: "top-full",
-        animationIn: ["animate__animated", "animate__fadeIn"],
-        animationOut: ["animate__animated", "animate__fadeOut"],
-        dismiss: {
-          duration: 7500,
-          onScreen: true,
-        },
-      });
+      popupNotification(
+        "warn",
+        NO_PASSWORD_TITLE,
+        NO_PASSWORD_MESSAGE,
+        TYPE_WARN
+      );
     } else {
       await navigator.clipboard.writeText(password);
       toggleCopied();
