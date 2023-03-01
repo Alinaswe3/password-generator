@@ -8,15 +8,29 @@
 
 html {
   font-size: 62.5%;
+
+  @media screen and (max-width: $desktop-small) {
+    font-size: 50%;
+  }
+
+  @media screen and (max-width: $phone-wide) {
+    font-size: 40%;
+  }
+
+  @media screen and (max-width: $phone) {
+    font-size: 36%;
+  }
+
 }
 
 body {
   min-height: 100vh;
   background-color: $very-dark-grey;
+  overflow: scroll;
 }
 
 #root {
-  height: 100vh;
+  min-height: 100vh;
   row-gap: 3.2rem;
   display: grid;
   justify-content: center;
