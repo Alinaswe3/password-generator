@@ -7,10 +7,15 @@
 }
 
 html {
-  font-size: 62.5%;
+
+  @media screen and (min-width: $desktop-medium) {
+    font-size: 55%;
+  }
+
+  font-size: 50%;
 
   @media screen and (max-width: $desktop-small) {
-    font-size: 50%;
+    font-size: 46%;
   }
 
   @media screen and (max-width: $phone-wide) {
@@ -26,7 +31,7 @@ html {
 body {
   min-height: 100vh;
   background-color: $very-dark-grey;
-  overflow: scroll;
+  overflow: auto;
 }
 
 #root {
