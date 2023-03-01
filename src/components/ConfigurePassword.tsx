@@ -67,6 +67,7 @@ const ConfigurePassword = () => {
       setStrengthVal(passwordStrength(generatedPassword).id + 1);
     } catch (e) {
       popupNotification("error", ERROR_TITLE, ERROR_MESSAGE, TYPE_DANGER);
+      console.log(e);
     } finally {
       setIsLoading(false);
     }
